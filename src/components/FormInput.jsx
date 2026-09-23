@@ -1,10 +1,11 @@
 import { useState } from "react"
+import { supabase } from "../supabase"
 
 export default function FormInput() {
     const [name, setName] = useState('')
     const [amount, setAmount] = useState('')
     const [classroom, setClassroom] = useState('')
-    
+
     const nameHandleChange = (e) => {
         setName(e.target.value)
     }
@@ -17,18 +18,22 @@ export default function FormInput() {
         setClassroom(e.target.value)
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        setName(e.target.value = '')
-        setAmount(e.target.value = '')
-        setClassroom(e.target.value = '')
 
-        console.log(`
-        name = ${name}, 
-        jumlah = ${amount}, 
-        kelas = ${classroom}
-        `)   
+        await createData()
+        
+        setName('')
+        setAmount('')
+        setClassroom('')
     }
+    
+    async function createData() {
+        const {error} = await supabase
+            .from('users')
+            .insert({ name: name, amount: amount, classroom: classroom })
+    }
+
 
     return (
         <form onSubmit={handleSubmit}>
@@ -41,7 +46,7 @@ export default function FormInput() {
                             className="p-2 rounded-md border border-gray-700 focus:outline-blue-400" 
                             value={name}
                             onChange={nameHandleChange}
-                            placeholder="Nama Lengkap" 
+                            placeholder="Nama Lengkap"  
                         />
                     </div>
                     <div className="flex flex-col gap-2 md:flex-row justify-between md:gap-4">
