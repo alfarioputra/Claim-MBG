@@ -1,5 +1,5 @@
 import React from "react";
-import FormInput from "../components/FormInput.jsx";
+import FormInput from "../components/FormInput";
 
 export default function Form() {    
 
