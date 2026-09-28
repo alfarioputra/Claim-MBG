@@ -1,11 +1,17 @@
 import { useEffect, useState } from "react"
 import { supabase } from "../supabase"
+import SubmitButton from "./SubmitButton"
 
 export default function FormInput() {
     const [name, setName] = useState('')
     const [amount, setAmount] = useState('')
     const [classroom, setClassroom] = useState('')
+    const [classList, setClassList] = useState([])
     const [error, setError] = useState({})
+
+    useEffect(() => {
+        getUserClass()
+    }, [])
 
     const nameHandleChange = (e) => {
         setName(e.target.value)
@@ -53,15 +59,21 @@ export default function FormInput() {
         dbError ? alert('data gagal dikirm') : alert('data berhasil dikirim')
     }
 
+    async function getUserClass() {
+        const { data } = await supabase.from('classes').select('*')
+
+        setClassList(data)
+    }
+
     return (
         <form onSubmit={handleSubmit}>
-            <div className="bg-white p-5 rounded-md shadow-md">
-                <div className="flex flex-col gap-2 md:gap-4">
-                    <div className="flex flex-col gap-2">
+            <div className="bg-white p-5 rounded-lg shadow-md">
+                <div className="flex flex-col gap-4 md:gap-6">
+                    <div className="flex flex-col gap-2 text-sm">
                         <label>Nama Perwakilan</label>
                         <input 
                             type="text" 
-                            className="p-2 rounded-md border border-gray-700 hover:border-cyan-500 focus:outline-0 focus:border focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/50" 
+                            className="text-base p-2.5 rounded-md border border-gray-700 hover:border-cyan-500 focus:outline-0 focus:border focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/50" 
                             value={name}
                             onChange={nameHandleChange}
                             placeholder="Nama Lengkap"  
@@ -72,12 +84,12 @@ export default function FormInput() {
                             </div>
                         )}
                     </div>
-                    <div className="flex flex-col gap-2 md:flex-row justify-between md:gap-4">
-                        <div className="flex flex-col gap-2 md:w-[60%]">
+                    <div className="flex flex-col gap-4 md:flex-row justify-between md:gap-6">
+                        <div className="flex flex-col gap-2 text-sm md:w-[60%]">
                             <label>Jumlah</label>
                             <input 
                                 type="number" 
-                                className="p-2 rounded-md border border-gray-700 hover:border-cyan-500 focus:outline-0 focus:border focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/50"
+                                className="text-base p-2.5 rounded-md border border-gray-700 hover:border-cyan-500 focus:outline-0 focus:border focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/50"
                                 value={amount}
                                 onChange={amountHandleChange}
                                 placeholder="Jumlah" 
@@ -88,15 +100,18 @@ export default function FormInput() {
                                 </div>
                             )}
                         </div>
-                        <div className="flex flex-col gap-2 md:w-[40%]">
+                        <div className="flex flex-col gap-2 text-sm md:w-[40%]">
                             <label>Kelas</label>
-                            <input 
-                                type="text" 
-                                className="p-2 rounded-md border border-gray-700 hover:border-cyan-500 focus:outline-0 focus:border focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/50" 
-                                value={classroom}
+                            <select
+                                className="text-base p-2.5 rounded-md border border-gray-700 hover:border-cyan-500 focus:outline-0 focus:border focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/50"
+                                value={classroom} 
                                 onChange={classroomHandleChange}
-                                placeholder="Kelas" 
-                            />
+                            >
+                                <option value='' disabled>Pilih Kelas</option>
+                                {classList.map((item) => (
+                                    <option key={item.id} value={item.value}>{item.value}</option>
+                                ))}
+                            </select>
                             { error.classroom && (
                                 <div className="text-red-500">
                                     <p>{error.classroom}</p>
