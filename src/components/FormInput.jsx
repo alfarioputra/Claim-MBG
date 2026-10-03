@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { supabase } from "../supabase"
+import { ChevronDown, ChevronUp } from "lucide-react"
 import SubmitButton from "./SubmitButton"
 
 export default function FormInput() {
@@ -12,18 +13,6 @@ export default function FormInput() {
     useEffect(() => {
         getUserClass()
     }, [])
-
-    const nameHandleChange = (e) => {
-        setName(e.target.value)
-    }
-
-    const amountHandleChange = (e) => {
-        setAmount(e.target.value)
-    }
-
-    const classroomHandleChange = (e) => {
-        setClassroom(e.target.value)
-    }
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -53,7 +42,7 @@ export default function FormInput() {
     
     async function createData() {
         const { error: dbError } = await supabase
-            .from('users')
+            .from('data')
             .insert({ name: name, amount: amount, classroom: classroom })
 
         dbError ? alert('data gagal dikirm') : alert('data berhasil dikirim')
@@ -70,42 +59,42 @@ export default function FormInput() {
             <div className="bg-white p-5 rounded-lg shadow-md">
                 <div className="flex flex-col gap-4 md:gap-6">
                     <div className="flex flex-col gap-2 text-sm">
-                        <label>Nama Perwakilan</label>
+                        <label className="text-[#334155] text-xs sm:text-sm">Nama Perwakilan Siswa / Piket <span className="font-blod text-[#EF4444]">*</span></label>
                         <input 
                             type="text" 
-                            className="text-base p-2.5 rounded-md border border-gray-700 hover:border-cyan-500 focus:outline-0 focus:border focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/50" 
+                            className="text-sm p-2.5 rounded-md border border-gray-700 hover:border-cyan-500 focus:outline-0 focus:border focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/50 sm:text-base"
                             value={name}
-                            onChange={nameHandleChange}
-                            placeholder="Nama Lengkap"  
+                            onChange={(e) => setName(e.target.value)}
+                            placeholder="Masukkan nama perwakilan"  
                         />
                         { error.name && (
-                            <div className="text-red-500">
+                            <div className="text-red-500 text-xs sm:text-sm">
                                 <p>{error.name}</p>
                             </div>
                         )}
                     </div>
-                    <div className="flex flex-col gap-4 md:flex-row justify-between md:gap-6">
-                        <div className="flex flex-col gap-2 text-sm md:w-[60%]">
-                            <label>Jumlah</label>
+                    <div className="flex flex-col gap-4 sm:flex-row justify-between md:gap-6">
+                        <div className="flex flex-col gap-2 text-sm sm:w-[60%]">
+                            <label className="text-[#334155] text-xs sm:text-sm">Jumlah Yang Diambil (Porsi) <span className="font-blod text-[#EF4444]">*</span></label>
                             <input 
                                 type="number" 
-                                className="text-base p-2.5 rounded-md border border-gray-700 hover:border-cyan-500 focus:outline-0 focus:border focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/50"
+                                className="text-sm p-2.5 rounded-md border border-gray-700 hover:border-cyan-500 focus:outline-0 focus:border focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/50 sm:text-base"
                                 value={amount}
-                                onChange={amountHandleChange}
-                                placeholder="Jumlah" 
+                                onChange={(e) => setAmount(e.target.value)}
+                                placeholder="Masukkan Jumlah" 
                             />
                             { error.amount && (
-                                <div className="text-red-500">
+                                <div className="text-red-500 text-xs sm:text-sm">
                                     <p>{error.amount}</p>
                                 </div>
                             )}
                         </div>
-                        <div className="flex flex-col gap-2 text-sm md:w-[40%]">
-                            <label>Kelas</label>
+                        <div className="flex flex-col gap-2 text-sm sm:w-[40%]">
+                            <label className="text-[#334155] text-xs sm:text-sm">Pilih Kelas</label>
                             <select
-                                className="text-base p-2.5 rounded-md border border-gray-700 hover:border-cyan-500 focus:outline-0 focus:border focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/50"
+                                className="text-sm p-2.5 rounded-md border border-gray-700 hover:border-cyan-500 focus:outline-0 focus:border focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/50 sm:text-base"
                                 value={classroom} 
-                                onChange={classroomHandleChange}
+                                onChange={(e) => setClassroom(e.target.value)}
                             >
                                 <option value='' disabled>Pilih Kelas</option>
                                 {classList.map((item) => (
@@ -113,7 +102,7 @@ export default function FormInput() {
                                 ))}
                             </select>
                             { error.classroom && (
-                                <div className="text-red-500">
+                                <div className="text-red-500 text-xs sm:text-sm">
                                     <p>{error.classroom}</p>
                                 </div>
                             )}
