@@ -3,7 +3,7 @@ import { supabase } from "../supabase"
 import { ChevronDown, ChevronUp } from "lucide-react"
 import SubmitButton from "./SubmitButton"
 
-export default function FormInput() {
+export default function FormInput({ onCreated }) {
     const [name, setName] = useState('')
     const [amount, setAmount] = useState('')
     const [classroom, setClassroom] = useState('')
@@ -33,7 +33,10 @@ export default function FormInput() {
 
         if (Object.keys(tempError).length > 0) return
 
-        await createData()
+        const recordId = await createData()
+        if (!recordId) return
+
+        onCreated(recordId)
         
         setName('')
         setAmount('')
@@ -41,11 +44,27 @@ export default function FormInput() {
     }
     
     async function createData() {
-        const { error: dbError } = await supabase
+        const { data, error: dbError } = await supabase
             .from('data')
-            .insert({ name: name, amount: amount, classroom: classroom })
+            .insert({ 
+                name: name, 
+                amount: amount, 
+                classroom: classroom, 
+                logtime: 'Standby',
+                status: 'Belum Diambil' 
+            })
+            .select('id')
+            .single()
 
-        dbError ? alert('data gagal dikirm') : alert('data berhasil dikirim')
+            
+            if (dbError) {
+                alert('Data gagal dikirim')
+                return null
+            }
+            
+        alert('Data berhasil dikirim')
+        console.log(data.id)
+        return data.id
     }
 
     async function getUserClass() {
@@ -57,7 +76,11 @@ export default function FormInput() {
     return (
         <form onSubmit={handleSubmit}>
             <div className="bg-white p-5 rounded-lg shadow-md">
-                <div className="flex flex-col gap-4 md:gap-6">
+                <div className="flex flex-col gap-4 sm:gap-6">
+                    <div className="flex flex-col gap-1 border-b border-[#F1F5F9] pb-2">
+                        <h1 className="font-bold text-lg sm:text-xl">Verifikasi Pengambilan MBG</h1>
+                        <p className="font-normal text-xs sm:text-sm text-[#475569]">Masukkan data perwakilan dan jumlah porsi harian</p>
+                    </div>
                     <div className="flex flex-col gap-2 text-sm">
                         <label className="text-[#334155] text-xs sm:text-sm">Nama Perwakilan Siswa / Piket <span className="font-blod text-[#EF4444]">*</span></label>
                         <input 
@@ -90,7 +113,7 @@ export default function FormInput() {
                             )}
                         </div>
                         <div className="flex flex-col gap-2 text-sm sm:w-[40%]">
-                            <label className="text-[#334155] text-xs sm:text-sm">Pilih Kelas</label>
+                            <label className="text-[#334155] text-xs sm:text-sm">Pilih Kelas <span className="font-blod text-[#EF4444]">*</span></label>
                             <select
                                 className="text-sm p-2.5 rounded-md border border-gray-700 hover:border-cyan-500 focus:outline-0 focus:border focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/50 sm:text-base"
                                 value={classroom} 
