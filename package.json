@@ -9,8 +9,9 @@
     "lint": "eslint .",
     "preview": "vite preview"
   },
-  "homepage":".",
+  "homepage": ".",
   "dependencies": {
+    "@clerk/react": "^6.17.6",
     "@supabase/supabase-js": "^2.116.0",
     "@tailwindcss/vite": "^4.3.3",
     "lucide-react": "^1.48.0",
