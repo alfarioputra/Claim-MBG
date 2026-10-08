@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { CircleArrowLeft, MapPin } from "lucide-react"
 import { supabase } from "../supabase"
-import { getFormattedTimeWIB } from "../utils/timeFormated"
+import { getFormattedTimeWIB } from "../utils/timeFormatted"
 
 export default function ReturnStep({ recordId, isPickupCompleted, onComplete }) {
     const [isSubmiting, setIsSubmiting] = useState(false)
