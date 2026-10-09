@@ -9,33 +9,35 @@ export default function Form() {
     const [isPickupCompleted, setIsPickupCompleted] = useState(getStoredPickupCompleted)
 
     return (
-        <div className="max-w-5xl mx-auto flex flex-col gap-5">
-            <FormInput 
-                onCreated={(id) => {
-                    saveRecordId(id)
-                    savePickupCompleted(false)
-                    setRecordId(id)
-                    setIsPickupCompleted(false)
-                }}
-            />
-            <PickupStep 
-                recordId={recordId} 
-                onSuccess={() => {
-                    savePickupCompleted(true)
-                    setIsPickupCompleted(true)  
-                }}
-                    
-            />
-            <ReturnStep 
-                recordId={recordId} 
-                isPickupCompleted={isPickupCompleted}
-                onComplete={() => {
-                    saveRecordId(null)
-                    savePickupCompleted(false)
-                    setRecordId(null)
-                    setIsPickupCompleted(false)    
-                }}
-            />
+        <div className="min-h-screen bg-[#F1F7FF] px-4 py-6">
+            <div className="max-w-5xl mx-auto flex flex-col gap-5">
+                <FormInput 
+                    onCreated={(id) => {
+                        saveRecordId(id)
+                        savePickupCompleted(false)
+                        setRecordId(id)
+                        setIsPickupCompleted(false)
+                    }}
+                    />
+                <PickupStep 
+                    recordId={recordId} 
+                    onSuccess={() => {
+                        savePickupCompleted(true)
+                        setIsPickupCompleted(true)  
+                    }}
+
+                    />
+                <ReturnStep 
+                    recordId={recordId} 
+                    isPickupCompleted={isPickupCompleted}
+                    onComplete={() => {
+                        saveRecordId(null)
+                        savePickupCompleted(false)
+                        setRecordId(null)
+                        setIsPickupCompleted(false)    
+                    }}
+                    />
+            </div>
         </div>
     )
 }
