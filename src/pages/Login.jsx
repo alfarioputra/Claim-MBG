@@ -29,26 +29,37 @@ export default function Login() {
             return
         }
 
-        const { error } = await signIn.password({
-            identifier: username,
-            password,
-        })
-
-        if (error) {
-            setError(error.message)
+        if (!signIn) {
+            setError("Layanan login sedang dimuat. Coba lagi sebentar.")
             return
         }
 
-        if (signIn.status === 'complete') {
-            await signIn.finalize({
-                navigate: () => {
-                    navigate('/redirect', { replace: true })
-                },
+        try {
+            const { error } = await signIn.password({
+                identifier: username,
+                password,
             })
-            return
+    
+            if (error) {
+                setError(error.message)
+                return
+            }
+    
+            if (signIn.status === 'complete') {
+                await signIn.finalize({
+                    navigate: () => {
+                        navigate('/redirect', { replace: true })
+                    },
+                })
+                return
+            }
+
+            setError(`Login belum selesai: ${signIn.status}`)
+        } catch (error) {
+            setError(error.message || "Login gagal. Periksa koneksi lalu coba lagi.")
         }
 
-        setError(`Login belum selesai: ${signIn.status}`)
+
     }
 
     return (
