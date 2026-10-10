@@ -10,7 +10,6 @@ ClaimMBG adalah portal pencatatan distribusi Makan Bergizi Gratis (MBG). Aplikas
 - Pencatatan kelas, nama perwakilan, jumlah porsi, waktu, dan status melalui Supabase.
 - Konfirmasi pengambilan dan pengembalian ompreng.
 - Dashboard dengan filter kelas dan pencarian data.
-- Halaman 404 untuk alamat yang tidak ditemukan.
 
 ## Teknologi
 
