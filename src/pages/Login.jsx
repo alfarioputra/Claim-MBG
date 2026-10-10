@@ -3,6 +3,7 @@ import LoginButton from "../components/LoginButton";
 import { Lock, Eye, EyeOff, User, LockKeyholeOpen } from "lucide-react";
 import { useSignIn, useAuth } from "@clerk/react";
 import { useNavigate } from "react-router-dom";
+import Footer from "../components/Footer";
 
 export default function Login() {
     const [username, setUsername] = useState('')
@@ -15,7 +16,7 @@ export default function Login() {
 
     useEffect(() => {
         if (authLoaded && isSignedIn) {
-            navigate('/dashboard', { replace: true })
+            navigate('/redirect', { replace: true })
         }
     }, [authLoaded, isSignedIn, navigate])
 
@@ -51,6 +52,7 @@ export default function Login() {
     }
 
     return (
+        <>
         <div className="flex min-h-screen items-center justify-center bg-[#F1F7FF] px-4 py-6">
             <div className="w-full max-w-lg mx-auto flex flex-col space-y-7 bg-white p-5 rounded-2xl shadow-md">
                 <div className="flex flex-col justify-center items-center space-y-3">
@@ -113,5 +115,7 @@ export default function Login() {
                 </form>
             </div>
         </div>
+        <Footer />
+        </>
     )
 }
