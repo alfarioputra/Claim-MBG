@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react"
 import { supabase } from "../supabase"
 import { Search, Check, Clock, CheckCheck, CircleAlert, LayoutDashboard } from "lucide-react";
-import LoginButton from "../components/LoginButton";
-import LogoutButton from "../components/LogoutButton";
+import Footer from "../components/Footer";
+import Navbar from "../components/Navbar";
 
 function Dashboard() {
     const [data, setData] = useState([])
@@ -61,6 +61,8 @@ function Dashboard() {
     }
 
     return (
+        <>
+        <Navbar compact />
         <div className="min-h-screen bg-[#F1F7FF] px-4 py-6">
             {/* desktop view */}
             <div className="hidden md:flex flex-col gap-5 max-w-5xl mx-auto bg-white p-8 rounded-3xl shadow-md">
@@ -73,9 +75,6 @@ function Dashboard() {
                             <p className="font-bold text-[#2684df]">Dashboard</p>
                             <h1 className="font-extrabold text-2xl">Monitoring Distribusi MBG</h1>
                         </div>
-                    </div>
-                    <div className="flex items-center">
-                        <LogoutButton />
                     </div>
                 </div>
                 <div className="w-full flex items-center justify-between">
@@ -153,9 +152,6 @@ function Dashboard() {
                             <h1 className="font-semibold text-sm">Monitoring Distribusi MBG</h1>
                         </div>
                     </div>
-                    <div className="flex items-center">
-                        <LogoutButton />
-                    </div>
                 </div>
                 <div className="flex flex-col gap-4 sm:flex-row justify-between ">
                     <div className="flex gap-2">
@@ -223,6 +219,8 @@ function Dashboard() {
                 </div>
             </div>
         </div>
+        <Footer />
+        </>
     )
 
 }

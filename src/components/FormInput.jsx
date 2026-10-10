@@ -78,7 +78,7 @@ export default function FormInput({ onCreated }) {
             <div className="bg-white p-5 rounded-lg shadow-md">
                 <div className="flex flex-col gap-4 sm:gap-6">
                     <div className="flex flex-col gap-1 border-b border-[#F1F5F9] pb-2">
-                        <h1 className="font-bold text-lg sm:text-xl">Verifikasi Pengambilan MBG</h1>
+                        <h2 className="font-bold text-lg sm:text-xl">Verifikasi Pengambilan MBG</h2>
                         <p className="font-normal text-xs sm:text-sm text-[#475569]">Masukkan data perwakilan dan jumlah porsi harian</p>
                     </div>
                     <div className="flex flex-col gap-2 text-sm">
