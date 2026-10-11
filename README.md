@@ -23,7 +23,7 @@ ClaimMBG adalah portal pencatatan distribusi Makan Bergizi Gratis (MBG). Aplikas
 
 ## Getting Started
 
-###Persyaratan 
+### Persyaratan 
 - Node.js yang didukung Vite 8 
 - npm
 
