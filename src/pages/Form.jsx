@@ -1,11 +1,11 @@
 import { useState } from "react";
-import FormInput from "../components/FormInput";
-import PickupStep from "../components/PickupStep";
-import ReturnStep from "../components/ReturnStep";
+import FormInput from "../components/form/FormInput";
+import PickupStep from "../components/form/PickupStep";
+import ReturnStep from "../components/form/ReturnStep";
 import { getStoredRecord, saveRecordId, getStoredPickupCompleted, savePickupCompleted } from "../utils/localStorage";
 import { FileText } from "lucide-react";
-import Footer from "../components/Footer";
-import Navbar from "../components/Navbar";
+import Footer from "../components/layout/Footer";
+import Navbar from "../components/layout/Navbar";
 
 export default function Form() {
     const [recordId, setRecordId] = useState(getStoredRecord)

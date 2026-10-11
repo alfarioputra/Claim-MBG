@@ -1,6 +1,6 @@
-import { Navigate } from "react-router-dom";
-import { useUser } from "@clerk/react";
-import Loading from "./Loading";
+import { Navigate } from "react-router-dom"
+import { useUser } from "@clerk/react"
+import Loading from "../Loading"
 
 export default function RoleRedirect() {
     const { isLoaded, isSignedIn, user } = useUser()

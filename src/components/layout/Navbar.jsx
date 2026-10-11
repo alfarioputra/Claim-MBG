@@ -1,7 +1,7 @@
 import { useState } from "react"
-import { Link, useNavigate } from "react-router-dom"
-import icon from '../assets/icon.svg'
-import LogoutButton from "./LogoutButton"
+import { Link } from "react-router-dom"
+import icon from '../../assets/icon.svg'
+import LogoutButton from "../auth/LogoutButton"
 import { LogIn } from "lucide-react"
 
 const navItems = [

@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react"
 import { supabase } from "../supabase"
-import { Search, Check, Clock, CheckCheck, CircleAlert, LayoutDashboard } from "lucide-react";
-import Footer from "../components/Footer";
-import Navbar from "../components/Navbar";
+import { Search, Check, Clock, CheckCheck, LayoutDashboard } from "lucide-react"
+import Footer from "../components/layout/Footer"
+import Navbar from '../components/layout/Navbar'
 
 function Dashboard() {
     const [data, setData] = useState([])

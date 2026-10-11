@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react"
-import { supabase } from "../supabase"
-import { ChevronDown, ChevronUp } from "lucide-react"
+import { supabase } from "../../supabase"
 import SubmitButton from "./SubmitButton"
 
 export default function FormInput({ onCreated }) {

@@ -1,4 +1,3 @@
-import React from "react";
 import { Home, ArrowLeft } from "lucide-react";
 
 export default function NotFoundPage() {

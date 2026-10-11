@@ -1,5 +1,3 @@
-import React from 'react';
-
 export default function Loading() {
     return (
         <div className="min-h-screen bg-[#F1F7FF] flex items-center justify-center">

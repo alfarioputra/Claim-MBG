@@ -1,7 +1,7 @@
 import { Suspense } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import RoleRedirect from './components/RoleRedirect'
-import ProtectedRoute from './components/ProtectedRoute'
+import RoleRedirect from './components/routes/RoleRedirect'
+import ProtectedRoute from './components/routes/ProtectedRoute'
 
 import Form from './pages/Form'
 import Dashboard from './pages/Dashboard'

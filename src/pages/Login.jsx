@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
-import LoginButton from "../components/LoginButton";
-import { Lock, Eye, EyeOff, User, LockKeyholeOpen } from "lucide-react";
-import { useSignIn, useAuth } from "@clerk/react";
-import { useNavigate } from "react-router-dom";
-import Footer from "../components/Footer";
+import { useState, useEffect } from "react"
+import LoginButton from "../components/auth/LoginButton"
+import { Lock, Eye, EyeOff, User, LockKeyholeOpen } from "lucide-react"
+import { useSignIn, useAuth } from "@clerk/react"
+import { useNavigate } from "react-router-dom"
+import Footer from "../components/layout/Footer"
 
 export default function Login() {
     const [username, setUsername] = useState('')
