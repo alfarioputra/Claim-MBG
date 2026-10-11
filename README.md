@@ -11,22 +11,27 @@ ClaimMBG adalah portal pencatatan distribusi Makan Bergizi Gratis (MBG). Aplikas
 - Konfirmasi pengambilan dan pengembalian ompreng.
 - Dashboard dengan filter kelas dan pencarian data.
 
-## Teknologi
+## Tech Stack
 
-- React 19 dan Vite 8
-- Tailwind CSS 4
-- Clerk untuk autentikasi
-- Supabase untuk penyimpanan data
-- React Router untuk navigasi
-- AOS untuk animasi pada bagian halaman
+- **React JS** - Frontend Library
+- **Tailwind CSS** - CSS framwork
+- **Clerk** - autentikasi
+- **Supabase** - Backend untuk penyimpanan data
+- **React Router** - untuk navigasi
+- **Lucide** - Icon library
+- **AOS** - Animation On Scroll library
 
-## Menjalankan Secara Lokal
+## Getting Started
 
-Prasyarat: Node.js yang didukung Vite 8 dan npm.
+###Persyaratan 
+- Node.js yang didukung Vite 8 
+- npm
 
-1. Pasang dependency:
+1. Clone & Install dependency
 
    ```bash
+   git clone https://github.com/alfarioputra/Claim-MBG.git
+   cd Claim-MBG
    npm install
    ```
 
@@ -38,9 +43,9 @@ Prasyarat: Node.js yang didukung Vite 8 dan npm.
    VITE_SUPABASE_KEY=ganti_dengan_supabase_publishable_key
    ```
 
-   Gunakan **Publishable Key** Clerk dan Supabase. Jangan masukkan Clerk Secret Key atau Supabase `service_role` key ke variabel `VITE_` karena variabel tersebut masuk ke bundle browser.
+   Gunakan **Publishable Key** Clerk dan Supabase.
 
-3. Jalankan server development:
+3. Jalankan server development
 
    ```bash
    npm run dev
@@ -56,7 +61,7 @@ Prasyarat: Node.js yang didukung Vite 8 dan npm.
 | `VITE_SUPABASE_URL` | URL project Supabase. |
 | `VITE_SUPABASE_KEY` | Publishable/anon key Supabase untuk client aplikasi. |
 
-Setelah mengubah environment variable di Vercel, jalankan deployment baru agar nilainya masuk ke build. Jangan commit `.env.local` atau membagikan key melalui chat maupun source code.
+Setelah mengubah environment variable di Vercel, jalankan deployment baru agar nilainya masuk ke build.
 
 ## Route
 
@@ -67,29 +72,18 @@ Setelah mengubah environment variable di Vercel, jalankan deployment baru agar n
 | `/redirect` | Pengalihan berdasarkan role | Perlu sesi Clerk |
 | `/form` | Pencatatan pengambilan dan pengembalian | Perlu sesi Clerk dengan role `user` |
 | `/dashboard` | Pemantauan distribusi MBG | Perlu sesi Clerk dengan role `admin` |
-| Route lain | Halaman tidak ditemukan | Publik |
+| Route lain | Not found page | Publik |
 
 Atur `publicMetadata.role` pada user Clerk menjadi `user` atau `admin` agar pengalihan setelah login sesuai dengan halaman yang diizinkan aplikasi.
 
-## Data Supabase
+## Database
 
 Aplikasi menggunakan tabel berikut:
 
 - `classes`: pilihan kelas dimuat dari tabel ini. Setiap row yang dipakai form memerlukan `id` dan `value`.
 - `data`: menyimpan catatan distribusi. Aplikasi membaca dan memperbarui kolom `id`, `name`, `classroom`, `amount`, `logtime`, dan `status`.
 
-Pastikan tabel dan kebijakan akses Supabase (Row Level Security) sesuai dengan operasi yang dilakukan aplikasi. Jangan menggunakan service-role key di frontend.
-
 Status yang digunakan aplikasi antara lain `Belum Diambil`, `Sudah Diambil`, dan `Sudah Dikembalikan`. Batas pengambilan yang ditampilkan adalah pukul 13.00 WIB; lokasi pengembalian ompreng adalah Serambi Aula Lama.
-
-## Perintah
-
-```bash
-npm run dev      # Menjalankan server development
-npm run build    # Membuat build production di folder dist
-npm run preview  # Menjalankan preview build production
-npm run lint     # Menjalankan ESLint
-```
 
 ## Deployment ke Vercel
 
